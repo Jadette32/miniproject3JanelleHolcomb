@@ -1,0 +1,48 @@
+
+{% extends 'base.html' %}
+{% block title %}Notes{% endblock %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Your Notes</h2>
+    <a href="{{ url_for('main.add_note') }}" class="btn btn-primary">Add Note</a>
+  </div>
+  {% if items %}
+    <ul class="list-group">
+      {% for n in items %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span><strong>{{ n.title }}</strong> <small class="text-muted">{{ n.created_at.strftime('%Y-%m-%d %H:%M') }}</small></span>
+        <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#noteModal" data-title="{{ n.title }}" data-body="{{ n.body|e }}">View</button>
+      </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No notes yet.</p>
+  {% endif %}
+
+  <!-- Modal -->
+  <div class="modal fade" id="noteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="noteTitle">Note</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="noteBody"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const noteModal = document.getElementById('noteModal');
+noteModal.addEventListener('show.bs.modal', event => {
+  const button = event.relatedTarget;
+  document.getElementById('noteTitle').textContent = button.getAttribute('data-title');
+  document.getElementById('noteBody').textContent = button.getAttribute('data-body');
+});
+</script>
+{% endblock %}
