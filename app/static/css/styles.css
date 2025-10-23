@@ -1,1 +1,53 @@
-body { padding-bottom: 40px; }
+/* Base layout spacing */
+body {
+  padding-bottom: 48px;
+  background-color: #fafafa; /* light neutral background */
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+}
+
+/* Headings */
+h1, h2, h3 {
+  font-weight: 500;
+  color: #2f2f2f;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #a4b9a3; /* soft sage tone */
+  border-color: #a4b9a3;
+  border-radius: 12px;
+}
+
+.btn-primary:hover {
+  background-color: #8da78c;
+  border-color: #8da78c;
+}
+
+/* Lists / notes */
+.list-group-item {
+  border-radius: 10px;
+  margin-bottom: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Footer */
+footer {
+  margin-top: 40px;
+  text-align: center;
+  color: #777;
+  font-size: 0.9rem;
+}
+/* Button hover glow */
+.btn-primary:hover,
+.btn-primary:focus {
+  box-shadow: 0 0 10px rgba(164, 185, 163, 0.6);
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
