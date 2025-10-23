@@ -1,18 +1,26 @@
-
-# Project 3 – Flask Web App
+# Mini Project 3 – Flask Web App
 
 **Author:** Janelle Holcomb  
-**Class:** INF601 - Advanced Programming in Python (Project 3)
+**Class:** INF601 - Advanced Programming in Python (Mini Project 3)
+Programming in Python (Project 3)
 
-## Overview
-A small Flask app with authentication, a SQLite database (two tables with a foreign key), Bootstrap UI with a modal, and at least five pages using the template inheritance pattern.
+## Project Overview
+This Flask app was built for my INF601 class. It includes authentication, a form with GET and POST, a SQLite database with a foreign key, and a Bootstrap modal. I kept the layout simple and clean, added a small footer with my name, and organized the pages so everything flows easily. It meets all of the project requirements while still reflecting my own minimal style.
 
 ### Pages
-1. **Home** (`/`) – public landing page.
-2. **About** (`/about`) – static template page.
-3. **Notes** (`/notes`) – list user notes; includes a **Bootstrap modal** to view note details.
-4. **Add Note** (`/notes/add`) – **form with GET and POST** to create a note.
-5. **Dashboard** (`/dashboard`) – protected page shown after login.
+1. **Home** (`/`) – public landing page  
+2. **About** (`/about`) – explains the project and process  
+3. **Reflections** (`/notes`) – list of user notes/reflections with a **Bootstrap modal** to view details  
+4. **Add Reflection** (`/notes/add`) – **form with GET and POST** for creating reflections  
+5. **Dashboard** (`/dashboard`) – protected page after login
+
+## Unique Touches
+- Renamed “Notes” to **Reflections** to make it feel more personal  
+- Added a **live search bar** to filter reflections by title or text  
+- Included a **word counter** on the Add Reflection form  
+- Soft, minimal color tweaks for a calmer look  
+- Added a small footer with my name and class info
+
 
 ## Requirements
 - Python 3.11+
