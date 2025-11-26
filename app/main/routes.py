@@ -7,6 +7,7 @@
 File: app/main/routes.py
 Description: Main blueprint routes (home, about, dashboard, notes)
 """
+from ..helpers import get_quote_for_mood
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
 
@@ -27,11 +28,21 @@ def about():
     return render_template("about.html")
 
 
+
 @main_bp.route("/dashboard")
 @login_required
 def dashboard():
     note_count = Note.query.filter_by(user_id=current_user.id).count()
-    return render_template("dashboard.html", note_count=note_count)
+
+    # get the user's most recent mood
+    latest_note = Note.query.filter_by(user_id=current_user.id).order_by(Note.created_at.desc()).first()
+
+    if latest_note:
+        quote = get_quote_for_mood(latest_note.mood)
+    else:
+        quote = get_quote_for_mood("calm")
+
+    return render_template("dashboard.html", note_count=note_count, quote=quote)
 
 
 @main_bp.route("/notes")
