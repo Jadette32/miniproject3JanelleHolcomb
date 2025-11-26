@@ -11,6 +11,14 @@
 <h5>Today's Quote</h5>
 <p>{{ quote }}</p>
 
+{% if chart_filename %}
+  <hr>
+  <h5>Your Mood Chart</h5>
+  <img src="{{ url_for('static', filename=chart_filename) }}"
+       class="img-fluid rounded shadow"
+       alt="Mood Chart">
+{% endif %}
+
 
   <p>
     This is your overview page where you can see how often you’ve taken time to pause

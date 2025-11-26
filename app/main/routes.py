@@ -7,6 +7,9 @@
 File: app/main/routes.py
 Description: Main blueprint routes (home, about, dashboard, notes)
 """
+
+from ..helpers import create_mood_chart
+from flask import current_app
 from ..helpers import get_quote_for_mood
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
@@ -34,7 +37,6 @@ def about():
 def dashboard():
     note_count = Note.query.filter_by(user_id=current_user.id).count()
 
-    # get the user's most recent mood
     latest_note = Note.query.filter_by(user_id=current_user.id).order_by(Note.created_at.desc()).first()
 
     if latest_note:
@@ -42,7 +44,15 @@ def dashboard():
     else:
         quote = get_quote_for_mood("calm")
 
-    return render_template("dashboard.html", note_count=note_count, quote=quote)
+    # create the mood chart
+    chart_filename = create_mood_chart(current_app)
+
+    return render_template(
+        "dashboard.html",
+        note_count=note_count,
+        quote=quote,
+        chart_filename=chart_filename
+    )
 
 
 @main_bp.route("/notes")

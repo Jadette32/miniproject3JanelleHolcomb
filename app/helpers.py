@@ -35,3 +35,43 @@ def get_quote_for_mood(mood):
 
     except Exception:
         return "Breathe. You are doing enough."
+
+import matplotlib
+matplotlib.use('Agg')  # Prevents issues on Windows with Flask
+import matplotlib.pyplot as plt
+import os
+
+from .models import Note
+from flask_login import current_user
+
+def create_mood_chart(app):
+    """
+    Count moods for the current user and generate a bar chart saved in /static.
+    """
+    with app.app_context():
+        notes = Note.query.filter_by(user_id=current_user.id).all()
+
+        # count moods
+        mood_counts = {}
+        for n in notes:
+            mood_counts[n.mood] = mood_counts.get(n.mood, 0) + 1
+
+        # if no moods, do not create a chart
+        if not mood_counts:
+            return None
+
+        moods = list(mood_counts.keys())
+        counts = list(mood_counts.values())
+
+        plt.figure(figsize=(6, 4))
+        plt.bar(moods, counts, color="#88b0a8")
+        plt.title("Your Mood Overview")
+        plt.xlabel("Mood")
+        plt.ylabel("Count")
+
+        # save chart to static directory
+        chart_path = os.path.join(app.static_folder, "mood_chart.png")
+        plt.savefig(chart_path)
+        plt.close()
+
+        return "mood_chart.png"
