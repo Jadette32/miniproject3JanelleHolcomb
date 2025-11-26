@@ -1,7 +1,16 @@
-
 {% extends 'base.html' %}
 {% block title %}Dashboard{% endblock %}
 {% block content %}
   <h2>Dashboard</h2>
-  <p>You have {{ note_count }} note(s).</p>
+
+  <p class="lead">
+    You have {{ note_count }} saved note{% if note_count != 1 %}s{% endif %}.
+  </p>
+
+  <p>
+    This is your overview page where you can see how often you’ve taken time to pause
+    and check in with yourself. Adding a note each day helps track your mood and
+    moments of reflection.
+  </p>
+
 {% endblock %}

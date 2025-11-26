@@ -1,18 +1,26 @@
-
 {% extends 'base.html' %}
-{% block title %}Add Reflection{% endblock %}
+{% block title %}Add Note{% endblock %}
 {% block content %}
-  <h2>Add Reflection</h2>
+  <h2>Add a Mindful Moment</h2>
+
   <form method="POST">
     {{ form.hidden_tag() }}
+
     <div class="mb-3">
       {{ form.title.label(class_='form-label') }}
       {{ form.title(class_='form-control') }}
     </div>
+
     <div class="mb-3">
       {{ form.body.label(class_='form-label') }}
       {{ form.body(class_='form-control', rows=6) }}
     </div>
+
+    <div class="mb-3">
+      {{ form.mood.label(class_='form-label') }}
+      {{ form.mood(class_='form-control') }}
+    </div>
+
     {{ form.submit(class_='btn btn-primary') }}
   </form>
 {% endblock %}
