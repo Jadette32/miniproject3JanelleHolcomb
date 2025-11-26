@@ -75,3 +75,93 @@ def create_mood_chart(app):
         plt.close()
 
         return "mood_chart.png"
+
+MOOD_SUGGESTIONS = {
+    "happy": [
+        "Enjoy this moment and notice what made today brighter.",
+        "Write one good thing that happened today.",
+        "Celebrate a small win or share joy with someone you love."
+    ],
+    "sad": [
+        "Try placing a hand on your chest and take one slow breath.",
+        "Let yourself feel without judgment. You are allowed to have slow days.",
+        "Do one comforting thing, even if it is small."
+    ],
+    "anxious": [
+        "Try a 4 second inhale and 6 second exhale to settle your body.",
+        "Pause and relax your shoulders, unclench your jaw.",
+        "Write down one worry to get it out of your head."
+    ],
+    "tired": [
+        "Close your eyes for 30 seconds and breathe gently.",
+        "Drink some water. Your body might need a small reset.",
+        "Move your arms or stretch your neck for a moment."
+    ],
+    "calm": [
+        "Enjoy this sense of ease. Let yourself stay here for a moment.",
+        "Notice the quiet parts of your day.",
+        "Write down something that feels grounding right now."
+    ]
+}
+
+def get_suggestions_for_mood(mood):
+    # fallback to calm if mood not in dictionary
+    return MOOD_SUGGESTIONS.get(mood.lower(), MOOD_SUGGESTIONS["calm"])
+
+from datetime import datetime, timedelta
+import numpy as np
+
+def create_weekly_mood_heatmap(app):
+    """
+    Create a 7-day mood heatmap using reflection_date instead of created_at.
+    """
+    with app.app_context():
+        today = datetime.utcnow().date()
+
+        # list of past 7 days (oldest → newest)
+        week_dates = [(today - timedelta(days=i)) for i in range(6, -1, -1)]
+
+        # fetch notes using reflection_date instead of created_at
+        one_week_ago = today - timedelta(days=6)
+        notes = Note.query.filter(
+            Note.user_id == current_user.id,
+            Note.reflection_date >= one_week_ago
+        ).all()
+
+        # mood order for heatmap rows
+        mood_levels = ["sad", "tired", "anxious", "calm", "happy"]
+        mood_index = {m: i for i, m in enumerate(mood_levels)}
+
+        # create 5 x 7 grid
+        heatmap = np.zeros((5, 7))
+
+        # fill the heatmap using reflection_date
+        for n in notes:
+            day = n.reflection_date
+            if day in week_dates:
+                col = week_dates.index(day)
+                row = mood_index.get(n.mood.lower())
+                if row is not None:
+                    heatmap[row][col] = 1
+
+        # draw heatmap
+        plt.figure(figsize=(7, 4))
+        plt.imshow(heatmap, cmap="Greens", interpolation="nearest", aspect="auto")
+        plt.title("Your Mood This Week")
+
+        # y-axis labels
+        plt.yticks(range(len(mood_levels)), mood_levels)
+
+        # x-axis labels
+        x_labels = [d.strftime("%a") for d in week_dates]
+        plt.xticks(range(7), x_labels)
+
+        plt.tight_layout()
+
+        filename = "weekly_mood_heatmap.png"
+        chart_path = os.path.join(app.static_folder, filename)
+
+        plt.savefig(chart_path)
+        plt.close()
+
+        return filename

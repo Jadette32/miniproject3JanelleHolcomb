@@ -22,6 +22,7 @@ class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), nullable=False)
     body = db.Column(db.Text, nullable=False)
-    mood = db.Column(db.String(20), nullable=False)     # ← FIXED: inside class
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    reflection_date = db.Column(db.Date, nullable=False)
+    mood = db.Column(db.String(20), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)

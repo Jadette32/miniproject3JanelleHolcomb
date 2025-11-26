@@ -8,9 +8,16 @@ File: app/main/routes.py
 Description: Main blueprint routes (home, about, dashboard, notes)
 """
 
-from ..helpers import create_mood_chart
+from ..helpers import (
+    create_mood_chart,
+    create_weekly_mood_heatmap,
+    get_quote_for_mood,
+    get_suggestions_for_mood
+)
+
+
+
 from flask import current_app
-from ..helpers import get_quote_for_mood
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
 
@@ -48,8 +55,11 @@ def dashboard():
     else:
         quote = get_quote_for_mood("calm")
 
+    suggestions = get_suggestions_for_mood(latest_note.mood) if latest_note else []
+
     # mood chart
     chart_filename = create_mood_chart(current_app)
+    weekly_chart = create_weekly_mood_heatmap(current_app)
 
     # the 3 most recent reflections
     recent_notes = Note.query.filter_by(user_id=current_user.id)\
@@ -61,7 +71,9 @@ def dashboard():
         quote=quote,
         latest_note=latest_note,
         recent_notes=recent_notes,
-        chart_filename=chart_filename
+        chart_filename=chart_filename,
+        weekly_chart=weekly_chart,
+        suggestions=suggestions
     )
 
 
@@ -80,9 +92,11 @@ def add_note():
         n = Note(
             title=form.title.data,
             body=form.body.data,
-            mood=form.mood.data,         # <-- ADDED MOOD HERE
+            mood=form.mood.data,
+            reflection_date=form.reflection_date.data,
             user_id=current_user.id
         )
+
         db.session.add(n)
         db.session.commit()
         flash("Note added.", "success")

@@ -8,7 +8,14 @@ Description: WTForms for authentication and notes
 """
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, TextAreaField, SubmitField, SelectField
+from wtforms import (
+    StringField,
+    PasswordField,
+    TextAreaField,
+    SubmitField,
+    SelectField
+)
+from wtforms.fields import DateField
 from wtforms.validators import DataRequired, Email, Length
 
 
@@ -27,17 +34,6 @@ class LoginForm(FlaskForm):
 class NoteForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired(), Length(max=120)])
     body = TextAreaField("Body", validators=[DataRequired()])
-
-    mood = SelectField(
-        "Mood",
-        choices=[
-            ("calm", "Calm"),
-            ("happy", "Happy"),
-            ("sad", "Sad"),
-            ("anxious", "Anxious"),
-            ("tired", "Tired"),
-        ],
-        default="calm"
-    )
-
-    submit = SubmitField("Save Note")
+    mood = SelectField("Mood", choices=[("happy","Happy"),("sad","Sad"),("anxious","Anxious"),("tired","Tired"),("calm","Calm")])
+    reflection_date = DateField("Reflection Date", validators=[DataRequired()])
+    submit = SubmitField("Save")
