@@ -1,15 +1,67 @@
 {% extends 'base.html' %}
 {% block title %}About{% endblock %}
+
 {% block content %}
-  <h2>About</h2>
-  <p>
-    Mindful Moments Tracker is my INF601 Final Project. I built it as a simple place
-    to pause, check in, and notice how each day feels. Users can write short notes,
-    choose a mood, and receive a supportive quote through the ZenQuotes API.
+
+<div class="card-soft mb-4">
+  <h2>About the Mindful Moments Tracker</h2>
+
+  <p class="lead">
+    This application was created for my INF601 Final Project. The goal was to take
+    the mini project from earlier in the semester and build it into something more
+    complete, personal, and functional while demonstrating the skills I learned
+    throughout the course.
   </p>
 
   <p>
-    This project builds on what I learned earlier in the semester with Flask,
-    templates, forms, databases, and API integration.
+    The Mindful Moments Tracker is designed to be a calm and supportive space for
+    self reflection. It helps users slow down, look inward, and understand their
+    emotional patterns over time. The design stays soft and simple so the user can
+    focus on how they feel rather than the complexity of the interface.
   </p>
+</div>
+
+<div class="card-soft mb-4">
+  <h3>Core Features</h3>
+
+  <ul style="font-size:1.1rem; line-height:1.7;">
+    <li>Save daily reflections in a clear and organized space</li>
+    <li>Select your mood for each reflection</li>
+    <li>View a mood based quote selected through the ZenQuotes API</li>
+    <li>See your mood history through a chart created with Matplotlib</li>
+    <li>Track emotional patterns to better understand your day to day rhythm</li>
+    <li>Access your account through a secure login system</li>
+  </ul>
+</div>
+
+<div class="card-soft mb-4">
+  <h3>Technical Overview</h3>
+
+  <p>
+    This project uses Flask as the main framework. It includes a full folder
+    structure with blueprints for clean separation of pages and authentication.
+    A SQLite database stores users, reflections, and moods. The ZenQuotes API
+    provides mood related quotes, and Matplotlib is used to generate the visual
+    mood chart on the dashboard.
+  </p>
+
+  <p>
+    These features demonstrate database management, user authentication,
+    API integration, visualization techniques, and modular application design
+    which were all key components of the course.
+  </p>
+</div>
+
+<div class="card-soft">
+  <h3>About the Creator</h3>
+
+  <p>
+    My name is Janelle Holcomb and I am a Computer Science student. As a mom, a
+    college student, and someone who values mindfulness, I wanted this project
+    to feel warm, simple, and genuinely supportive. I focused on creating an
+    environment that encourages gentle reflection while also showcasing real
+    technical growth.
+  </p>
+</div>
+
 {% endblock %}

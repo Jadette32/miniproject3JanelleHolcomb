@@ -1,53 +1,83 @@
-/* Base layout spacing */
+/* --- Calm Wellness Aesthetic --- */
+
 body {
-  padding-bottom: 48px;
-  background-color: #fafafa; /* light neutral background */
-  font-family: "Segoe UI", Arial, sans-serif;
-  color: #333;
+    background: linear-gradient(135deg, #eef4f1 0%, #f6f9f7 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3d3a;
+    margin: 0;
 }
 
-/* Navbar */
+/* NAVBAR */
 .navbar {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  background-color: #ffffff;
+    background-color: #6f8f89 !important; /* soft sage */
+    padding: 0.8rem 0;
 }
 
-/* Headings */
-h1, h2, h3 {
-  font-weight: 500;
-  color: #2f2f2f;
+.navbar-brand {
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
-/* Buttons */
+.nav-link {
+    color: #f1f6f4 !important;
+}
+
+.nav-link:hover {
+    color: #ffffff !important;
+    text-shadow: 0 0 5px rgba(255,255,255,0.4);
+}
+
+/* BUTTONS */
 .btn-primary {
-  background-color: #a4b9a3; /* soft sage tone */
-  border-color: #a4b9a3;
-  border-radius: 12px;
+    background-color: #8fbdb3;
+    border-color: #8fbdb3;
+    color: #ffffff !important;
+    border-radius: 10px;
+    padding: 10px 20px;
 }
 
 .btn-primary:hover {
-  background-color: #8da78c;
-  border-color: #8da78c;
+    background-color: #7bab9f;
+    border-color: #7bab9f;
 }
 
-/* Lists / notes */
-.list-group-item {
-  border-radius: 10px;
-  margin-bottom: 6px;
-  border: 1px solid rgba(0, 0, 0, 0.05);
+/* CARDS / BOXES */
+.card-soft,
+.bg-soft {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 }
 
-/* Footer */
+/* HEADINGS */
+h1, h2, h3 {
+    color: #314a46;
+    font-weight: 600;
+}
+
+/* INPUTS */
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #cdd7d4;
+}
+
+.form-control:focus {
+    border-color: #8fbdb3;
+    box-shadow: 0 0 0 0.1rem rgba(143,189,179,0.25);
+}
+
+/* MODAL */
+.modal-content {
+    border-radius: 14px;
+}
+
+.modal-header {
+    background-color: #f4f8f7;
+}
+
+/* FOOTER */
 footer {
-  margin-top: 40px;
-  text-align: center;
-  color: #777;
-  font-size: 0.9rem;
-}
-/* Button hover glow */
-.btn-primary:hover,
-.btn-primary:focus {
-  box-shadow: 0 0 10px rgba(164, 185, 163, 0.6);
-  transform: translateY(-1px);
-  transition: all 0.2s ease;
+    margin-top: 4rem;
+    color: #6b7c79;
 }

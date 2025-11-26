@@ -35,22 +35,32 @@ def about():
 @main_bp.route("/dashboard")
 @login_required
 def dashboard():
+    # total notes count
     note_count = Note.query.filter_by(user_id=current_user.id).count()
 
-    latest_note = Note.query.filter_by(user_id=current_user.id).order_by(Note.created_at.desc()).first()
+    # user's latest reflection
+    latest_note = Note.query.filter_by(user_id=current_user.id)\
+        .order_by(Note.created_at.desc()).first()
 
+    # mood based quote
     if latest_note:
         quote = get_quote_for_mood(latest_note.mood)
     else:
         quote = get_quote_for_mood("calm")
 
-    # create the mood chart
+    # mood chart
     chart_filename = create_mood_chart(current_app)
+
+    # the 3 most recent reflections
+    recent_notes = Note.query.filter_by(user_id=current_user.id)\
+        .order_by(Note.created_at.desc()).limit(3).all()
 
     return render_template(
         "dashboard.html",
         note_count=note_count,
         quote=quote,
+        latest_note=latest_note,
+        recent_notes=recent_notes,
         chart_filename=chart_filename
     )
 

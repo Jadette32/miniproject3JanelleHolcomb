@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
-{% block title %}Add Note{% endblock %}
+{% block title %}Add Reflection{% endblock %}
+
 {% block content %}
-  <h2>Add a Mindful Moment</h2>
+<div class="card-soft" style="max-width:700px; margin:auto;">
+
+  <h2 class="mb-3">Add Reflection</h2>
 
   <form method="POST">
     {{ form.hidden_tag() }}
@@ -21,6 +24,8 @@
       {{ form.mood(class_='form-control') }}
     </div>
 
-    {{ form.submit(class_='btn btn-primary') }}
+    {{ form.submit(class_='btn btn-primary mt-3') }}
   </form>
+
+</div>
 {% endblock %}

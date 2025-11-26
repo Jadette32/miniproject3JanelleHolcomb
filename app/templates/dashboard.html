@@ -1,29 +1,37 @@
 {% extends 'base.html' %}
 {% block title %}Dashboard{% endblock %}
+
 {% block content %}
-  <h2>Dashboard</h2>
 
-  <p class="lead">
-    You have {{ note_count }} saved note{% if note_count != 1 %}s{% endif %}.
-  </p>
+<div class="card-soft mb-4">
+  <h2 class="mb-3">Your Dashboard</h2>
+  <p class="lead">You currently have {{ note_count }} saved reflection{% if note_count != 1 %}s{% endif %}.</p>
+</div>
 
-<hr>
-<h5>Today's Quote</h5>
-<p>{{ quote }}</p>
+<!-- Quote section -->
+<div class="card-soft mb-4" style="background:#f8fbfa;">
+  <h4 class="mb-2">Your Quote</h4>
+  <p style="font-size:1.2rem; color:#3a5a55;">{{ quote }}</p>
+</div>
 
+<!-- Mood chart -->
 {% if chart_filename %}
-  <hr>
-  <h5>Your Mood Chart</h5>
+<div class="card-soft mb-4">
+  <h4 class="mb-3">Your Mood Chart</h4>
   <img src="{{ url_for('static', filename=chart_filename) }}"
-       class="img-fluid rounded shadow"
-       alt="Mood Chart">
+       alt="Mood Chart"
+       class="img-fluid rounded shadow-sm">
+</div>
 {% endif %}
 
-
+<!-- Info box -->
+<div class="card-soft">
+  <h4 class="mb-2">About This Dashboard</h4>
   <p>
-    This is your overview page where you can see how often you’ve taken time to pause
-    and check in with yourself. Adding a note each day helps track your mood and
-    moments of reflection.
+    This page brings together your reflections, moods, and emotional patterns. Your quote
+    is based on your most recent mood and is chosen using the ZenQuotes API. The chart shows
+    the moods you selected over time so you can see how your emotional rhythm has shifted.
   </p>
+</div>
 
 {% endblock %}

@@ -1,11 +1,78 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock %}
+
 {% block content %}
-  <div class="p-4 bg-light rounded-3">
-    <h1 class="display-5">Welcome</h1>
-    <p class="lead">
-      This is my Mindful Moments Tracker, created for my INF601 Final Project.
-      It is a calm space to pause, check in, and reflect on how your day feels.
-    </p>
-  </div>
+
+<!-- Logo or identity line -->
+<div class="text-center mb-4">
+  <h1 style="font-weight:700; color:#3b5a55; letter-spacing:1px;">
+    Mindful Moments Tracker
+  </h1>
+  <p class="text-muted" style="font-size:1.1rem;">
+    A calm place to pause, reflect, and understand your emotional patterns
+  </p>
+</div>
+
+<!-- Main welcome box -->
+<div class="card-soft mb-4">
+  <h2 class="mb-3">Welcome</h2>
+
+  <p class="lead">
+    This project was created for my INF601 Final Project and it builds on the concept
+    introduced in my Mini Project Three. My goal from the beginning was to create a calm and
+    meaningful space where users can slow down and check in with themselves without feeling
+    overwhelmed. I wanted a simple tool that encourages reflection and emotional awareness
+    through gentle, approachable design.
+  </p>
+
+  <p>
+    The application allows users to save daily reflections, select their mood, and receive
+    a motivational quote that matches how they are feeling. This brings the idea from my original
+    project proposal to life and adds more depth by connecting the users emotional patterns with
+    helpful guidance.
+  </p>
+
+  {% if not current_user.is_authenticated %}
+    <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg mt-3">
+      Get Started
+    </a>
+  {% endif %}
+</div>
+
+<!-- Features Section -->
+<div class="card-soft mb-4">
+  <h3 class="mb-3">What You Can Do Here</h3>
+
+  <ul style="font-size:1.1rem; line-height:1.6;">
+    <li>Write short reflections about your day</li>
+    <li>Choose a mood that represents how you are feeling</li>
+    <li>View a personalized quote selected to match your mood</li>
+    <li>See all of your reflections in one organized place</li>
+    <li>Track your emotional patterns through a mood chart</li>
+  </ul>
+</div>
+
+<!-- Technical Explanation -->
+<div class="card-soft">
+  <h3 class="mb-3">How This Works</h3>
+
+  <p>
+    This application uses the ZenQuotes API to gather inspirational and mood based quotes.
+    Instead of displaying a random quote, the app looks at the users selected mood and chooses
+    a quote that feels appropriate for that emotional state. This gives the quote more meaning
+    and connects it to the users experience.
+  </p>
+
+  <p>
+    The dashboard includes a chart generated with Matplotlib that shows how often each mood
+    has been selected. This makes it easy to see patterns over time and gives the user a simple
+    visual summary of their emotional journey.
+  </p>
+
+  <p>
+    Together these features bring both mindfulness and technology together in a clear and
+    supportive way while staying true to the goals laid out in my original project proposal.
+  </p>
+</div>
+
 {% endblock %}
