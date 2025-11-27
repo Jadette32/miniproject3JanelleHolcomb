@@ -1,6 +1,6 @@
 # INF601 - Advanced Programming in Python
 # Janelle Holcomb
-# Mini Project 3
+# Final Project
 
 
 """
