@@ -47,7 +47,8 @@ def create_app():
     from .auth.routes import auth_bp
     from .main.routes import main_bp
 
-    app.register_blueprint(auth_bp)
+    app.register_blueprint(auth_bp, url_prefix="/auth")
+
     app.register_blueprint(main_bp)
 
     # 🌿 Add the init-db command (professor REQUIRED this)
